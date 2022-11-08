@@ -14,7 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('swepstakes', function (Blueprint $table) {
-            $table->id();
+            $table->uuid(column: "id")->primary();
+            $table->foreign(columns: "user_id")->constrained();
+            $table->integer(column: "number_of_winners")->default(1);
+            $table->dateTime(column: "end_date")->nullable();
+            $table->text(column: "description")->nullable();
             $table->timestamps();
         });
     }
