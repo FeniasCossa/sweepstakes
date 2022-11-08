@@ -41,4 +41,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function swepstake(){
+        return $this->hasMany(Swepstake::class);
+    }
 }

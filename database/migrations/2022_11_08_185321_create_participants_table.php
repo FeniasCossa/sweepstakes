@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid(column: "swepstake_id");
+            $table->foreignUuid(column: "swepstakes_id");
             $table->string(column: "name");
              $table->string(column: "email");
               $table->dateTime(column: "awarded_at")->nullable();
