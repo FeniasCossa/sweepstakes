@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Str;
 class Swepstake extends Model
 {
     use HasFactory;
@@ -16,6 +16,26 @@ class Swepstake extends Model
         "description"
     ];
 
-    protected $keyType="string";
-    public $incrementing=false;
+    protected $keyType = 'string';
+
+    public $incrementing = false;
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function (Model $model) {
+            if (empty($model->id)) {
+                $model->id = Str::uuid();
+            }
+        });
+    }
+
+    public function user(){
+        return  $this->belongsTo(User::class);
+    }
+
+    public function participants(){
+        return  $this->hasMany(participant::class);
+    }
 }
